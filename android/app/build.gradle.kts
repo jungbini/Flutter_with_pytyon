@@ -38,7 +38,7 @@ android {
 
         flavorDimensions += "pyVersion"
         productFlavors {
-            create("py39") { dimension = "pyVersion" }
+            create("py312") { dimension = "pyVersion" }
         }
     }
 
@@ -57,9 +57,22 @@ flutter {
 
 chaquopy {
     productFlavors {
-        getByName("py39") { version = "3.9" }
+        getByName("py312") { version = "3.12" }
     }
     defaultConfig {
-        buildPython("/usr/bin/python")
+        buildPython("/opt/homebrew/Caskroom/miniconda/base/bin/python")
+        pip {
+//            install("numpy")
+//            install("qrcode")
+//            install("Pillow")
+//            install("pytz")
+//            install("datetime")
+//            install("configparser")
+//            install("pymysql")
+//            install("pandas")
+//            install("astral")
+//            install("scipy")      // 불가능
+//            install("cosinorpy") // 불가능(scipy 때문)
+        }
     }
 }

@@ -21,18 +21,15 @@ class MainActivity: FlutterActivity() {
 
             when (call.method) {
                 "runPythonGreet" -> {
-                    val name = call.argument<String>("name")
-                    if (name != null) {
-                        try {
-                            val pythonModule = py.getModule("my_script") // Python 파일명 (확장자 제외)
-                            val greeting = pythonModule.callAttr("greet", name).toString()
-                            result.success(greeting)
-                        } catch (e: Exception) {
-                            result.error("PYTHON_ERROR", "Error running Python greet function", e.toString())
-                        }
-                    } else {
-                        result.error("ARGUMENT_ERROR", "Name argument is missing", null)
+                    try {
+                        val savePath = filesDir.absolutePath
+                        val pythonModule = py.getModule("my_script") // Python 파일명 (확장자 제외)
+                        val greeting = pythonModule.callAttr("greet", savePath).toString()
+                        result.success(greeting)
+                    } catch (e: Exception) {
+                        result.error("PYTHON_ERROR", e.toString(), e.toString())
                     }
+
                 }
                 "runPythonAddArrays" -> {
                     val list1 = call.argument<List<Int>>("list1")

@@ -33,9 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _getPythonGreeting() async {
     String greeting;
     try {
-      final String result = await platform.invokeMethod('runPythonGreet', {
-        'name': 'Flutter',
-      });
+      final String result = await platform.invokeMethod('runPythonGreet');
       greeting = result;
     } on PlatformException catch (e) {
       greeting = "Failed to get greeting: '${e.message}'.";
